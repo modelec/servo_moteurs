@@ -1,8 +1,9 @@
 #ifndef SERVO_MOTOR
 #define SERVO_MOTOR
-#include <stdio.h>
+
+#include <iostream>
 #include <pigpio.h>
-#include <time.h>
+#include <ctime>
 
 //Define registers address
 #define PCA9685_ADDR 0x40

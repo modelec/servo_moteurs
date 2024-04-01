@@ -1,20 +1,4 @@
-#include <stdio.h>
-#include <pigpio.h>
-#include <time.h>
-
-//Define registers address
-#define PCA9685_ADDR 0x40
-#define MODE1_REG    0x00
-#define PRE_SCALE    0xFE
-
-#define LED0_ON_L 0x06
-#define LED0_ON_H 0x07
-#define LED0_OFF_L 0x08
-#define LED0_OFF_H 0x09
-
-//Define duty cycle (in a range of 12 bits = 4096) for PWM (min 2%, max 12%)
-#define SERVO_MIN    82 // 0.02*4096
-#define SERVO_MAX    492 // 0.12*4096
+#include "servo_motor.h"
 
 // Fonction pour initialiser le PCA9685
 void initPCA9685(int handle)
@@ -115,54 +99,7 @@ void ouvrir_pince(int handle, int pince){
 		break;
 	case 2:
 		angle = 125;
-		break;	
+		break;
     }
     setServoPosition(handle, pince, angle);
 }
-
-
-
-int main()
-{
-    int handle;
-
-    if (gpioInitialise() < 0)
-    {
-        fprintf(stderr, "Impossible d'initialiser pigpio\n");
-        return 1;
-    }
-
-    handle = i2cOpen(1, PCA9685_ADDR, 0);
-
-    if (handle < 0)
-    {
-        fprintf(stderr, "Impossible d'ouvrir la connexion I2C\n");
-        gpioTerminate();
-        return 1;
-    }
-
-    initPCA9685(handle);
-    lever_bras(handle);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0);
-    ouvrir_pince(handle, 0);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    ouvrir_pince(handle, 1);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    ouvrir_pince(handle, 2);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    fermer_pince(handle, 0);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    fermer_pince(handle, 1);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    fermer_pince(handle, 2);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0);
-    baisser_bras(handle);
-    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
-    i2cClose(handle);
-
-    // Terminaison de pigpio
-    gpioTerminate();
-
-    return 0;
-}
-
