@@ -22,6 +22,8 @@ int MyTCPClient::init() {
 
     initPCA9685(this->handle);
 
+    this->sendMessage("servo_pot;strat;ready;1");
+
     return 0;
 }
 
@@ -35,7 +37,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
 
     if (token[1] == "servo_pot" || token[1] == "all") {
         if (token[2] == "ping") {
-            this->sendMessage("pong");
+            this->sendMessage("servo_pot;ihm;pong;1");
         }
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
