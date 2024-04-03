@@ -34,7 +34,7 @@ void initPCA9685(int handle)
 void setServoPosition(int handle, int channel, int position)
 {
     if (position < 0 || position > 180){
-	return;
+        return;
     }
     int on_time = SERVO_MIN + (SERVO_MAX - SERVO_MIN) * position / 180 - 1;//temps ou le servo est allumé par rapport à 4096
     int on_time_lsb = on_time & ~(0b1111 << 8);// 8 premiers bits de poids faible du temps ou le servo est allumé
@@ -43,38 +43,38 @@ void setServoPosition(int handle, int channel, int position)
     i2cWriteByteData(handle, LED0_ON_H + 4* channel, 0);
     i2cWriteByteData(handle, LED0_OFF_L + 4 * channel, on_time_lsb);//0xCD = 0.05*2^12-1
     if (0 < (on_time >> 8) && (on_time >> 8) < 256){
-    	i2cWriteByteData(handle, LED0_OFF_H + 4*channel, on_time_msb);
+        i2cWriteByteData(handle, LED0_OFF_H + 4*channel, on_time_msb);
     }
     else {
-    	i2cWriteByteData(handle, LED0_OFF_H +4*channel, 0);
+        i2cWriteByteData(handle, LED0_OFF_H +4*channel, 0);
     }
 }
 
 //Change l'angle du servo de maniere precise (jspr par pitié)
 void changeServoPositionSynchro(int handle, int channel, int currentPosition, int targetPosition){
-	if (targetPosition - currentPosition > 0){
-		for (int i = currentPosition+1; i <= targetPosition; i++){
-			setServoPosition(handle, channel, i);
-        		gpioSleep(PI_TIME_RELATIVE, 0, 10000);
-		}//Fo bouger les servo en meme temps aaah donc rajouter les position et channel et info des autres servo
-	}
+        if (targetPosition - currentPosition > 0){
+                for (int i = currentPosition+1; i <= targetPosition; i++){
+                        setServoPosition(handle, channel, i);
+                        gpioSleep(PI_TIME_RELATIVE, 0, 10000);
+                }//Fo bouger les servo en meme temps aaah donc rajouter les position et channel et info des autres servo
+        }
 }
 
 //Fonctions pour le bras sur le canal 1
 void baisser_bras(int handle){
-    int angle = 107;
-    for (int i = 1; i <= 107;i++){
+    int angle = 100;
+    for (int i = 1; i <= angle;i++){
         gpioSleep(PI_TIME_RELATIVE, 0, 10000);
         setServoPosition(handle, 4, i);
-        setServoPosition(handle, 5, 107-i);
+        setServoPosition(handle, 5, angle-i);
     }
 }
 
 void lever_bras(int handle){
     int angle = 107;
-    for (int i = 1; i <= 107;i++){
+    for (int i = 1; i <= angle;i++){
         gpioSleep(PI_TIME_RELATIVE, 0, 10000);
-        setServoPosition(handle, 4, 107-i);
+        setServoPosition(handle, 4, angle-i);
         setServoPosition(handle, 5, i);
     }
 }
@@ -84,18 +84,18 @@ void lever_bras(int handle){
 void fermer_pince(int handle, int pince){
     int angle;
     if (pince < 0 || pince > 2){
-    	return;
+        return;
     }
     switch(pince){
-	case 0:
-	    angle = 142;
-	    break;
-	case 1:
-	    angle = 42;
-	    break;
-	case 2:
-	    angle = 152;
-	    break;
+        case 0:
+            angle = 142;
+            break;
+        case 1:
+            angle = 42;
+            break;
+        case 2:
+            angle = 152;
+            break;
     }
     setServoPosition(handle, pince, angle);
 //10° de + pour fermer completement
@@ -104,23 +104,29 @@ void fermer_pince(int handle, int pince){
 void ouvrir_pince(int handle, int pince){
     int angle;
     if (pince < 0 || pince > 2){
-    	return;
+        return;
     }
     switch(pince){
-	case 0:
-		angle = 115;
-		break;
-	case 1:
-		angle = 22;
-		break;
-	case 2:
-		angle = 125;
-		break;	
+        case 0:
+                angle = 115;
+                break;
+        case 1:
+                angle = 22;
+                break;
+        case 2:
+                angle = 125;
+                break;
     }
     setServoPosition(handle, pince, angle);
 }
 
+void check_panneau(int handle, int quelBras){//bras gauche = 7 bras droit = 6
+        setServoPosition(handle, quelBras, 30);
+}
 
+void uncheck_panneau(int handle, int quelBras){
+        setServoPosition(handle, quelBras, 0);
+}
 
 int main()
 {
@@ -142,7 +148,7 @@ int main()
     }
 
     initPCA9685(handle);
-    lever_bras(handle);
+    /*lever_bras(handle);
     gpioSleep(PI_TIME_RELATIVE, 1, 0);
     ouvrir_pince(handle, 0);
     gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
@@ -158,6 +164,10 @@ int main()
     gpioSleep(PI_TIME_RELATIVE, 1, 0);
     baisser_bras(handle);
     gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
+    */
+    check_panneau(handle, 6);
+    gpioSleep(PI_TIME_RELATIVE, 1, 0); // Pause de 2 secondes
+    uncheck_panneau(handle, 6);
     i2cClose(handle);
 
     // Terminaison de pigpio
@@ -165,4 +175,3 @@ int main()
 
     return 0;
 }
-
