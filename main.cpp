@@ -30,7 +30,5 @@ int main(int argc, char* argv[]) {
         client.sendMessage(message.c_str());
     }
 
-    client.stop();
-
     return 0;
 }
