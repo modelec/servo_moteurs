@@ -24,6 +24,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if (token[2] == "fermer pince") {
             int pince = std::stoi(token[3]);
+
             this->fermer_pince(pince);
         }
         else if (token[2] == "baisser bras") {
@@ -122,4 +123,8 @@ void MyTCPClient::check_panneau(int quelBras) {
 
 void MyTCPClient::uncheck_panneau(int quelBras) {
     this->pwm_setServoPosition(quelBras, 0);
+}
+
+void MyTCPClient::pwm_clear() {
+    pca.set_all_pwm(0,0);
 }

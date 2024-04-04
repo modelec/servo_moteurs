@@ -34,6 +34,8 @@ public:
 
     void uncheck_panneau(int quelBras);
 
+    void pwm_clear();
+
 private:
     PiPCA9685::PCA9685 pca;
 };

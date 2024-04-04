@@ -21,6 +21,10 @@ int main(int argc, char* argv[]) {
             client.stop();
             break;
         }
+        if (message == "clear") {
+            client.pwm_clear();
+            break;
+        }
 
         client.sendMessage(message.c_str());
     }
