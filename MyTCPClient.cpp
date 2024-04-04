@@ -1,6 +1,7 @@
 #include "MyTCPClient.h"
 
-MyTCPClient::MyTCPClient(const char *serverIP, int port) : TCPClient(serverIP, port) {
+MyTCPClient::MyTCPClient(const char *serverIP, int port) : TCPClient(serverIP, port), pca() {
+    this->pwm_init();
 }
 
 void MyTCPClient::handleMessage(const std::string &message) {
@@ -52,28 +53,7 @@ void MyTCPClient::pwm_init() {
 
 void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     int on_time = SERVO_MIN + (SERVO_MAX - SERVO_MIN) * position / 180 - 1;//temps ou le servo est allumé par rapport à 4096
-    // pca.set_pwm(servo, 0, on_time);
-    std::cout << (0 & 0xFF) << std::endl;
-    std::cout << (0 >> 8) << std::endl;
-    std::cout << (on_time & 0xFF) << std::endl;
-    std::cout << (on_time >> 8) << std::endl;
-
-    int on_time_lsb = on_time & ~(0b1111 << 8);// 8 premiers bits de poids faible du temps ou le servo est allumé
-    int on_time_msb = on_time >> 8;// 4 premiers bits poids fort de on_time
-    // i2cWriteWordData(handle, LED0_ON_L + 4 * channel, 0);
-    std::cout << 0 << std::endl;
-    // i2cWriteByteData(handle, LED0_ON_H + 4* channel, 0);
-    std::cout << 0 << std::endl;
-    std::cout << on_time_lsb << std::endl;
-    // i2cWriteByteData(handle, LED0_OFF_L + 4 * channel, on_time_lsb);//0xCD = 0.05*2^12-1
-    if (0 < (on_time >> 8) && (on_time >> 8) < 256){
-        // i2cWriteByteData(handle, LED0_OFF_H + 4*channel, on_time_msb);
-        std::cout << on_time_msb << std::endl;
-    }
-    else {
-        // i2cWriteByteData(handle, LED0_OFF_H +4*channel, 0);
-        std::cout << 0 << std::endl;
-    }
+    pca.set_pwm(servo, 0, on_time);
 }
 
 void MyTCPClient::baisser_bras() {

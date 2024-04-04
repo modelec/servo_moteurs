@@ -35,5 +35,5 @@ public:
     void uncheck_panneau(int quelBras);
 
 private:
-    PiPCA9685::PCA9685 pca{};
+    PiPCA9685::PCA9685 pca;
 };
