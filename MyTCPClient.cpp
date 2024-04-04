@@ -40,6 +40,15 @@ void MyTCPClient::handleMessage(const std::string &message) {
         else if (token[2] == "uncheck panneau") {
             int bras = std::stoi(token[3]);
             this->uncheck_panneau(bras);
+        } else if (token[2] == "angle") {
+            std::vector<std::string> args = TCPSocket::split(token[3], ",");
+            if (args.size() != 2) {
+                std::cerr << "Nombre d'arguments invalide" << std::endl;
+                return;
+            }
+            int servo = std::stoi(args[0]);
+            int angle = std::stoi(args[1]);
+            this->pwm_setServoPosition(servo, angle);
         }
     }
 }
