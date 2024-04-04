@@ -33,4 +33,8 @@ void fermer_pince(int handle, int pince);
 
 void ouvrir_pince(int handle, int pince);
 
+void check_panneau(int handle, int quelBras);
+
+void uncheck_panneau(int handle, int quelBras);
+
 #endif

@@ -103,3 +103,11 @@ void ouvrir_pince(int handle, int pince){
     }
     setServoPosition(handle, pince, angle);
 }
+
+void check_panneau(int handle, int quelBras){//bras gauche = 7 bras droit = 6
+        setServoPosition(handle, quelBras, 30);
+}
+
+void uncheck_panneau(int handle, int quelBras){
+        setServoPosition(handle, quelBras, 0);
+}

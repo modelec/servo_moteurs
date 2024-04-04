@@ -35,7 +35,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
         return;
     }
 
-    if (token[1] == "servo_pot" || token[1] == "all") {
+    if (token[1] == "servo_moteur" || token[1] == "all") {
         if (token[2] == "ping") {
             this->sendMessage("servo_pot;ihm;pong;1");
         }
@@ -52,6 +52,14 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if (token[2] == "lever bras") {
             lever_bras(handle);
+        }
+        else if (token[2] == "check panneau") {
+            int bras = std::stoi(token[3]);
+            check_panneau(handle, bras);
+        }
+        else if (token[2] == "uncheck panneau") {
+            int bras = std::stoi(token[3]);
+            uncheck_panneau(handle, bras);
         }
     }
 }
