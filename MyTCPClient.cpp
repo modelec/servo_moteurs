@@ -12,6 +12,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
     }
 
     if (token[1] == "servo_moteur" || token[1] == "all") {
+        std::cout << message << std::endl;
         if (token[2] == "ping") {
             this->sendMessage("servo_pot;ihm;pong;1");
         }
