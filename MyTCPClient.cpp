@@ -70,7 +70,7 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
 void MyTCPClient::baisser_bras() {
     int angle = 100;
     for (int i = 1; i <= angle;i++){
-        usleep(10'000);
+        usleep(1'000);
         this->pwm_setServoPosition(4, i);
         this->pwm_setServoPosition(5, angle-i);
     }
@@ -79,7 +79,7 @@ void MyTCPClient::baisser_bras() {
 void MyTCPClient::lever_bras() {
     int angle = 107;
     for (int i = 1; i <= angle;i++){
-        usleep(10'000);
+        usleep(1'000);
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
     }
