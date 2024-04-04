@@ -9,13 +9,9 @@ int main(int argc, char* argv[]) {
 
     MyTCPClient client("127.0.0.1", port);
 
-    int err = client.init();
-
-    if (err != 0) {
-        return err;
-    }
-
     client.start();
+
+    client.sendMessage("servo_pot;strat;ready;1");
 
     while (true) {
         std::string message;

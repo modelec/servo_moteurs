@@ -1,30 +1,6 @@
 #include "MyTCPClient.h"
 
 MyTCPClient::MyTCPClient(const char *serverIP, int port) : TCPClient(serverIP, port) {
-    this->handle = -1;
-}
-
-int MyTCPClient::init() {
-    if (gpioInitialise() < 0)
-    {
-        fprintf(stderr, "Impossible d'initialiser pigpio\n");
-        return 1;
-    }
-
-    this->handle = i2cOpen(1, PCA9685_ADDR, 0);
-
-    if (this->handle < 0)
-    {
-        fprintf(stderr, "Impossible d'ouvrir la connexion I2C\n");
-        gpioTerminate();
-        return 1;
-    }
-
-    initPCA9685(this->handle);
-
-    this->sendMessage("servo_pot;strat;ready;1");
-
-    return 0;
 }
 
 void MyTCPClient::handleMessage(const std::string &message) {
@@ -41,32 +17,103 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
-            ouvrir_pince(handle, pince);
+            ouvrir_pince(pince);
         }
         else if (token[2] == "fermer pince") {
             int pince = std::stoi(token[3]);
-            fermer_pince(handle, pince);
+            fermer_pince(pince);
         }
         else if (token[2] == "baisser bras") {
-            baisser_bras(handle);
+            baisser_bras();
         }
         else if (token[2] == "lever bras") {
-            lever_bras(handle);
+            lever_bras();
         }
         else if (token[2] == "check panneau") {
             int bras = std::stoi(token[3]);
-            check_panneau(handle, bras);
+            check_panneau(bras);
         }
         else if (token[2] == "uncheck panneau") {
             int bras = std::stoi(token[3]);
-            uncheck_panneau(handle, bras);
+            uncheck_panneau(bras);
         }
     }
 }
 
-MyTCPClient::~MyTCPClient() {
-    i2cClose(this->handle);
+void MyTCPClient::pwm_setFrequency(float freq) {
+    pca.set_pwm_freq(freq);
+}
 
-    // Terminaison de pigpio
-    gpioTerminate();
+void MyTCPClient::pwm_init() {
+    pwm_setFrequency(50.0);
+}
+
+void MyTCPClient::pwm_setServoPosition(int servo, int position) {
+    int on_time = SERVO_MIN + (SERVO_MAX - SERVO_MIN) * position / 180 - 1;//temps ou le servo est allumé par rapport à 4096
+    pca.set_pwm(servo, 0, on_time);
+}
+
+void MyTCPClient::baisser_bras() {
+    int angle = 100;
+    for (int i = 1; i <= angle;i++){
+        usleep(10'000);
+        this->pwm_setServoPosition(4, i);
+        this->pwm_setServoPosition(5, angle-i);
+    }
+}
+
+void MyTCPClient::lever_bras() {
+    int angle = 107;
+    for (int i = 1; i <= angle;i++){
+        usleep(10'000);
+        this->pwm_setServoPosition(4, angle-i);
+        this->pwm_setServoPosition(5, i);
+    }
+}
+
+void MyTCPClient::fermer_pince(int pince) {
+    int angle;
+    if (pince < 0 || pince > 2){
+        return;
+    }
+    switch(pince){
+        case 0:
+            angle = 142;
+        break;
+        case 1:
+            angle = 42;
+        break;
+        case 2:
+            angle = 152;
+        break;
+    }
+    this->pwm_setServoPosition(pince, angle);
+}
+
+void MyTCPClient::ouvrir_pince(int pince) {
+    int angle;
+    if (pince < 0 || pince > 2){
+        return;
+    }
+    switch(pince){
+        case 0:
+            angle = 115;
+        break;
+        case 1:
+            angle = 22;
+        break;
+        case 2:
+            angle = 125;
+        break;
+    }
+    this->pwm_setServoPosition(pince, angle);
+}
+
+
+void MyTCPClient::check_panneau(int quelBras) {
+    this->pwm_setServoPosition(quelBras, 30);
+}
+
+void MyTCPClient::uncheck_panneau(int quelBras) {
+    this->pwm_setServoPosition(quelBras, 0);
 }
