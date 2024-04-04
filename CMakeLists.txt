@@ -12,10 +12,5 @@ add_executable(servo_motor
         MyTCPClient.h
         main.cpp)
 
-add_executable(test
-    test.main.cpp
-)
-
 target_link_libraries(servo_motor TCPSocket)
 target_link_libraries(servo_motor ${PiPCA9685_LIBRARY})
-target_link_libraries(test ${PiPCA9685_LIBRARY})
