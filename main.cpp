@@ -28,6 +28,10 @@ int main(int argc, char* argv[]) {
             client.fermer_pince(0);
             client.fermer_pince(1);
             client.fermer_pince(2);
+        } else if (message == "baisser") {
+            client.baisser_bras();
+        } else if (message == "lever") {
+            client.lever_bras();
         }
 
         client.sendMessage(message.c_str());
