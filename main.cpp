@@ -23,7 +23,6 @@ int main(int argc, char* argv[]) {
         }
         if (message == "clear") {
             client.pwm_clear();
-            break;
         }
 
         client.sendMessage(message.c_str());
