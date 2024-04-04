@@ -88,6 +88,7 @@ void MyTCPClient::fermer_pince(int pince) {
             angle = 152;
         break;
     }
+    std::cout << pince, angle << std::endl;
     this->pwm_setServoPosition(pince, angle);
 }
 
@@ -107,6 +108,7 @@ void MyTCPClient::ouvrir_pince(int pince) {
             angle = 125;
         break;
     }
+    std::cout << pince, angle << std::endl;
     this->pwm_setServoPosition(pince, angle);
 }
 
