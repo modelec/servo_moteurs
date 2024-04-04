@@ -51,6 +51,7 @@ void MyTCPClient::pwm_init() {
     pwm_setFrequency(50.0);
 }
 
+
 void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     int on_time = SERVO_MIN + (SERVO_MAX - SERVO_MIN) * position / 180 - 1;//temps ou le servo est allumé par rapport à 4096
     pca.set_pwm(servo, 0, on_time);
@@ -59,7 +60,7 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
 void MyTCPClient::baisser_bras() {
     int angle = 100;
     for (int i = 1; i <= angle;i++){
-        usleep(100'000);
+        usleep(10'000);
         this->pwm_setServoPosition(4, i);
         this->pwm_setServoPosition(5, angle-i);
     }
@@ -68,7 +69,7 @@ void MyTCPClient::baisser_bras() {
 void MyTCPClient::lever_bras() {
     int angle = 107;
     for (int i = 1; i <= angle;i++){
-        usleep(100'000);
+        usleep(10'000);
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
     }
@@ -90,7 +91,6 @@ void MyTCPClient::fermer_pince(int pince) {
             angle = 152;
         break;
     }
-    std::cout << pince << " " << angle << std::endl;
     this->pwm_setServoPosition(pince, angle);
 }
 
@@ -110,7 +110,6 @@ void MyTCPClient::ouvrir_pince(int pince) {
             angle = 125;
         break;
     }
-    std::cout << pince << " " << angle << std::endl;
     this->pwm_setServoPosition(pince, angle);
 }
 
