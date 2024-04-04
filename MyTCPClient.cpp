@@ -18,6 +18,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
+            std::cout << "ouvrir pince : " << pince << std::endl;
             ouvrir_pince(pince);
         }
         else if (token[2] == "fermer pince") {
