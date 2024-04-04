@@ -83,7 +83,7 @@ void MyTCPClient::fermer_pince(int pince) {
     }
     switch(pince){
         case 0:
-            angle = 137;
+            angle = 142;
         break;
         case 1:
             angle = 42;
@@ -109,7 +109,7 @@ void MyTCPClient::ouvrir_pince(int pince) {
             angle = 22;
         break;
         case 2:
-            angle = 125;
+            angle = 120;
         break;
     }
     std::cout << "Ouvrir pince : " << pince << std::endl;
