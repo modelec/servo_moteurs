@@ -24,6 +24,11 @@ int main(int argc, char* argv[]) {
         if (message == "clear") {
             client.pwm_clear();
         }
+        else if (message == "close") {
+            client.fermer_pince(0);
+            client.fermer_pince(1);
+            client.fermer_pince(2);
+        }
 
         client.sendMessage(message.c_str());
     }
