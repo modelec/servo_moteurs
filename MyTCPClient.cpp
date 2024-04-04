@@ -19,25 +19,25 @@ void MyTCPClient::handleMessage(const std::string &message) {
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
             std::cout << "ouvrir pince : " << pince << std::endl;
-            ouvrir_pince(pince);
+            this->ouvrir_pince(pince);
         }
         else if (token[2] == "fermer pince") {
             int pince = std::stoi(token[3]);
-            fermer_pince(pince);
+            this->fermer_pince(pince);
         }
         else if (token[2] == "baisser bras") {
-            baisser_bras();
+            this->baisser_bras();
         }
         else if (token[2] == "lever bras") {
-            lever_bras();
+            this->lever_bras();
         }
         else if (token[2] == "check panneau") {
             int bras = std::stoi(token[3]);
-            check_panneau(bras);
+            this->check_panneau(bras);
         }
         else if (token[2] == "uncheck panneau") {
             int bras = std::stoi(token[3]);
-            uncheck_panneau(bras);
+            this->uncheck_panneau(bras);
         }
     }
 }
@@ -58,7 +58,7 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
 void MyTCPClient::baisser_bras() {
     int angle = 100;
     for (int i = 1; i <= angle;i++){
-        usleep(10'000);
+        usleep(100'000);
         this->pwm_setServoPosition(4, i);
         this->pwm_setServoPosition(5, angle-i);
     }
@@ -67,7 +67,7 @@ void MyTCPClient::baisser_bras() {
 void MyTCPClient::lever_bras() {
     int angle = 107;
     for (int i = 1; i <= angle;i++){
-        usleep(10'000);
+        usleep(100'000);
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
     }
