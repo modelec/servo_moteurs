@@ -1,5 +1,4 @@
 #include "MyTCPClient.h"
-#include "servo_motor.h"
 
 int main(int argc, char* argv[]) {
     int port = 8080;
