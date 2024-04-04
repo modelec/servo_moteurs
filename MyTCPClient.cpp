@@ -52,7 +52,11 @@ void MyTCPClient::pwm_init() {
 
 void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     int on_time = SERVO_MIN + (SERVO_MAX - SERVO_MIN) * position / 180 - 1;//temps ou le servo est allumé par rapport à 4096
-    pca.set_pwm(servo, 0, on_time);
+    // pca.set_pwm(servo, 0, on_time);
+    std::cout << (0 & 0xFF) << std::endl;
+    std::cout << (0 >> 8) << std::endl;
+    std::cout << (on_time & 0xFF) << std::endl;
+    std::cout << (on_time >> 8) << std::endl;
 }
 
 void MyTCPClient::baisser_bras() {
