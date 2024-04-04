@@ -10,9 +10,9 @@ int main() {
     while(true) {
         pca.set_pwm(0, 0, 370);
         usleep(1'000'000);
-        pca.set_pwm(0, 0, 415);
+        pca.set_pwm(1, 0, 415);
         usleep(1'000'000);
-        pca.set_pwm(0, 0, 460);
+        pca.set_pwm(1, 0, 460);
         usleep(1'000'000);
         pca.set_pwm(0, 0, 415);
         usleep(1'000'000);
