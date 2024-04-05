@@ -131,7 +131,7 @@ void MyTCPClient::ouvrir_pince(int pince) {
         break;
     }
     std::cout << "Ouvrir pince : " << pince << std::endl;
-    for (int i = old_angle; i >= old_angle;i--){
+    for (int i = old_angle; i >= angle;i--){
     	this->pwm_setServoPosition(pince, i);
 	usleep(5'000);
     }
