@@ -86,43 +86,55 @@ void MyTCPClient::lever_bras() {
 }
 
 void MyTCPClient::fermer_pince(int pince) {
-    int angle;
+    int angle, old_angle;
     if (pince < 0 || pince > 2){
         return;
     }
     switch(pince){
         case 0:
             angle = 142;
+	    old_angle = 110;
         break;
         case 1:
             angle = 42;
+	    old_angle = 22;
         break;
         case 2:
             angle = 152;
+	    old_angle = 120
         break;
     }
     std::cout << "Fermer pince : " << pince << std::endl;
-    this->pwm_setServoPosition(pince, angle);
+    for(int i = old_angle; i <= angle;i++){
+    	this->pwm_setServoPosition(pince, i);
+	usleep(5'000);
+    }
 }
 
 void MyTCPClient::ouvrir_pince(int pince) {
-    int angle;
+    int angle, old_angle;
     if (pince < 0 || pince > 2){
         return;
     }
     switch(pince){
         case 0:
             angle = 110;
+	    old_angle = 142;
         break;
         case 1:
             angle = 22;
+	    old_angle = 42;
         break;
         case 2:
             angle = 120;
+	    old_angle = 152;
         break;
     }
     std::cout << "Ouvrir pince : " << pince << std::endl;
-    this->pwm_setServoPosition(pince, angle);
+    for (int i = old_angle; i >= old_angle;i--){
+    	this->pwm_setServoPosition(pince, i);
+	usleep(5'000);
+    }
 }
 
 
