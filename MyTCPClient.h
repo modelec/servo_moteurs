@@ -38,4 +38,7 @@ public:
 
 private:
     PiPCA9685::PCA9685 pca;
+
+    bool pinceOuverte[3] = {false, false, false};
+    bool brasBaisse = false;
 };
