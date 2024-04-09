@@ -28,9 +28,13 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->fermer_pince(pince);
         }
         else if (token[2] == "baisser bras") {
+            this->fermer_pince(0);
+            this->fermer_pince(2);
             this->baisser_bras();
         }
         else if (token[2] == "lever bras") {
+            this->fermer_pince(0);
+            this->fermer_pince(2);
             this->lever_bras();
         }
         else if (token[2] == "check panneau") {
@@ -93,7 +97,7 @@ void MyTCPClient::fermer_pince(int pince) {
     switch(pince){
         case 0:
             angle = 142;
-	        old_angle = 110;
+	        old_angle = 115;
         break;
         case 1:
             angle = 42;
@@ -101,7 +105,7 @@ void MyTCPClient::fermer_pince(int pince) {
         break;
         case 2:
             angle = 152;
-    	    old_angle = 120;
+    	    old_angle = 130;
         break;
     }
     std::cout << "Fermer pince : " << pince << std::endl;
