@@ -158,7 +158,7 @@ void MyTCPClient::ouvrir_pince(int pince) {
     	this->pwm_setServoPosition(pince, i);
 	usleep(5'000);
     }
-    pinceOuverte[pince] = false;
+    pinceOuverte[pince] = true;
 }
 
 
