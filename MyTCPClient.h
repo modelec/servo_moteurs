@@ -39,6 +39,6 @@ public:
 private:
     PiPCA9685::PCA9685 pca;
 
-    bool pinceOuverte[3] = {false, false, false};
-    bool brasBaisse = false;
+    bool pinceOuverte[3] = {true, true, true};
+    bool brasBaisse = true;
 };
