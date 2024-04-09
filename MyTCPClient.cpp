@@ -30,12 +30,12 @@ void MyTCPClient::handleMessage(const std::string &message) {
         else if (token[2] == "baisser bras") {
             this->fermer_pince(0);
             this->fermer_pince(2);
-            this->baisser_bras();
+            // this->baisser_bras();
         }
         else if (token[2] == "lever bras") {
             this->fermer_pince(0);
             this->fermer_pince(2);
-            this->lever_bras();
+            // this->lever_bras();
         }
         else if (token[2] == "check panneau") {
             int bras = std::stoi(token[3]);
