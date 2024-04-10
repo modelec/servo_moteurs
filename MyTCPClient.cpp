@@ -66,10 +66,10 @@ void MyTCPClient::pwm_setFrequency(float freq) {
 
 void MyTCPClient::pwm_init() {
     pwm_setFrequency(50.0);
-    this->fermer_pince(0);
-    this->fermer_pince(1);
-    this->fermer_pince(2);
-    this->baisser_bras();
+    this->fermer_pince(0, true);
+    this->fermer_pince(1, true);
+    this->fermer_pince(2, true);
+    this->baisser_bras(true);
 }
 
 
@@ -78,8 +78,8 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     pca.set_pwm(servo, 0, on_time);
 }
 
-void MyTCPClient::baisser_bras() {
-    if (brasBaisse){
+void MyTCPClient::baisser_bras(bool force) {
+    if (brasBaisse && !force){
         return;
     }
     int angle = 100;
@@ -91,8 +91,8 @@ void MyTCPClient::baisser_bras() {
     brasBaisse = true;
 }
 
-void MyTCPClient::lever_bras() {
-    if (!brasBaisse){
+void MyTCPClient::lever_bras(bool force) {
+    if (!brasBaisse && !force){
         return;
     }
     int angle = 107;
@@ -104,8 +104,8 @@ void MyTCPClient::lever_bras() {
     brasBaisse = false;
 }
 
-void MyTCPClient::fermer_pince(int pince) {
-    if (!pinceOuverte[pince]){
+void MyTCPClient::fermer_pince(int pince, bool force) {
+    if (!pinceOuverte[pince] && !force){
         return;
     }
     int angle, old_angle;
@@ -134,8 +134,8 @@ void MyTCPClient::fermer_pince(int pince) {
     pinceOuverte[pince] = false;
 }
 
-void MyTCPClient::ouvrir_pince(int pince) {
-    if (pinceOuverte[pince]){
+void MyTCPClient::ouvrir_pince(int pince, bool force) {
+    if (pinceOuverte[pince] && !force){
         return;
     }
     int angle, old_angle;
