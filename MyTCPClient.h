@@ -24,15 +24,15 @@ public:
 
     void pwm_setServoPosition(int servo, int position);
 
-    void baisser_bras();
+    void baisser_bras(bool force = false);
 
     void transport_bras();
 
-    void lever_bras();
+    void lever_bras(bool force = false);
 
-    void fermer_pince(int pince);
+    void fermer_pince(int pince, bool force = false);
 
-    void ouvrir_pince(int pince);
+    void ouvrir_pince(int pince, bool force = false);
 
     void check_panneau(int quelBras);
 
@@ -43,4 +43,6 @@ public:
 private:
     PiPCA9685::PCA9685 pca;
     int positionBras;
+    bool pinceOuverte[3] = {true, true, true};
+    int brasBaisse = 0;
 };
