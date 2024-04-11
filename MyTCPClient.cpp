@@ -100,11 +100,11 @@ void MyTCPClient::mid_bras(bool force) {
     if (brasBaisse == 1 && !force){
         return;
     }
-    int angle = 102;
+    int angle = 110;
     for (int i = 1; i <= angle;i++){
         usleep(5'000);
-        this->pwm_setServoPosition(4, angle-i);
-        this->pwm_setServoPosition(5, i);
+        this->pwm_setServoPosition(4, i);
+        this->pwm_setServoPosition(5, angle-i);
     }
     brasBaisse = 1;
 }
