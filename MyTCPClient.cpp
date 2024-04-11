@@ -77,7 +77,24 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     pca.set_pwm(servo, 0, on_time);
 }
 
-void MyTCPClient::baisser_bras(bool force) {
+void MyTCPClient::baisser_bras() {
+    int angle;
+    switch(this->poisitionBras){
+	case BRAS_HAUT:
+		angle = 100;
+		break;
+	case BRAS_TRANSPORT:
+		angle = 17;
+		break;
+    }
+    this->positionBras = BRAS_BAS;
+    for (int i = 1; i <= angle;i++){
+        usleep(5'000);
+        this->pwm_setServoPosition(4, i);
+        this->pwm_setServoPosition(5, angle-i);
+    }
+}
+/*void MyTCPClient::baisser_bras(bool force) {
     if (brasBaisse == 0 && !force){
         return;
     }
@@ -88,9 +105,49 @@ void MyTCPClient::baisser_bras(bool force) {
         this->pwm_setServoPosition(5, angle-i);
     }
     brasBaisse = 0;
+}*/
+
+void MyTCPClient::transport_bras(){
+    int angle;
+    switch(this->poisitionBras){
+   	case BRAS_BAS:
+		angle  = 17;
+		for (int i = 1; i <= angle; i++){
+        		usleep(5'000);
+        		this->pwm_setServoPosition(4, angle-i);
+        		this->pwm_setServoPosition(5, i);
+		}
+		break;
+	case BRAS_HAUT:
+		angle = 90;
+		for (int i = 1; i <= angle; i++){
+        		usleep(5'000);
+        		this->pwm_setServoPosition(4, i);
+        		this->pwm_setServoPosition(5, angle-i);
+		}
+		break;
+    }
+    this->positionBras = BRAS_TRANSPORT;
 }
 
-void MyTCPClient::lever_bras(bool force) {
+void MyTCPClient::lever_bras() {
+    int angle;
+    switch(this->poisitionBras){
+	case BRAS_BAS:
+		angle = 107;
+		break;
+	case BRAS_TRANSPORT:
+    		angle = 90
+		break;
+    }	
+    this->positionBras = BRAS_HAUT;
+  for (int i = 1; i <= angle;i++){
+  	usleep(5'000);
+  	this->pwm_setServoPosition(4, angle-i);
+       	this->pwm_setServoPosition(5, i);
+  }
+
+/*void MyTCPClient::lever_bras(bool force) {
     if (!brasBaisse == 2 && !force){
         return;
     }
@@ -101,7 +158,7 @@ void MyTCPClient::lever_bras(bool force) {
         this->pwm_setServoPosition(5, i);
     }
     brasBaisse = 2;
-}
+}*/
 
 void MyTCPClient::fermer_pince(int pince, bool force) {
     if (!pinceOuverte[pince] && !force){

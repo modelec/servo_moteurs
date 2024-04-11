@@ -9,7 +9,9 @@
 
 #define SERVO_MIN    82 // 0.02*4096
 #define SERVO_MAX    492 // 0.12*4096
-
+#define BRAS_BAS	0
+#define BRAS_HAUT	1
+#define BRAS_TRANSPORT	2
 class MyTCPClient : public TCPClient {
 public:
     explicit MyTCPClient(const char* serverIP = "127.0.0.1", int port = 8080);
@@ -23,6 +25,8 @@ public:
     void pwm_setServoPosition(int servo, int position);
 
     void baisser_bras(bool force = false);
+
+    void transport_bras();
 
     void lever_bras(bool force = false);
 
@@ -38,7 +42,7 @@ public:
 
 private:
     PiPCA9685::PCA9685 pca;
-
+    int positionBras;
     bool pinceOuverte[3] = {true, true, true};
     int brasBaisse = 0;
 };
