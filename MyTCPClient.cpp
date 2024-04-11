@@ -37,11 +37,6 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->fermer_pince(2);
             this->lever_bras();
         }
-        /*else if (token[2] == "mid bras") {
-            this->fermer_pince(0);
-            this->fermer_pince(2);
-            this->mid_bras();
-        }*/
         else if (token[2] == "check panneau") {
             int bras = std::stoi(token[3]);
             this->check_panneau(bras);
@@ -95,20 +90,6 @@ void MyTCPClient::baisser_bras(bool force) {
     }
     brasBaisse = 0;
 }
-
-/*void MyTCPClient::mid_bras(bool force) {
-    if (brasBaisse == 1 && !force){
-        return;
-    }
-    int angle = 80;
-    for (int i = 1; i <= angle;i++){
-        usleep(5'000);
-        this->pwm_setServoPosition(4, i);
-        this->pwm_setServoPosition(5, angle-i);
-    }
-    brasBaisse = 1;
-}*/
-
 
 void MyTCPClient::lever_bras(bool force) {
     if (!brasBaisse == 2 && !force){
