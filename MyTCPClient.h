@@ -24,6 +24,8 @@ public:
 
     void baisser_bras(bool force = false);
 
+    void mid_bras(bool force = false);
+
     void lever_bras(bool force = false);
 
     void fermer_pince(int pince, bool force = false);
@@ -40,5 +42,5 @@ private:
     PiPCA9685::PCA9685 pca;
 
     bool pinceOuverte[3] = {true, true, true};
-    bool brasBaisse = true;
+    int brasBaisse = 0;
 };

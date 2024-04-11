@@ -37,6 +37,11 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->fermer_pince(2);
             this->lever_bras();
         }
+        else if (token[2] == "mid bras") {
+            this->fermer_pince(0);
+            this->fermer_pince(2);
+            this->mid_bras();
+        }
         else if (token[2] == "check panneau") {
             int bras = std::stoi(token[3]);
             this->check_panneau(bras);
@@ -79,7 +84,7 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
 }
 
 void MyTCPClient::baisser_bras(bool force) {
-    if (brasBaisse && !force){
+    if (brasBaisse == 0 && !force){
         return;
     }
     int angle = 100;
@@ -88,11 +93,25 @@ void MyTCPClient::baisser_bras(bool force) {
         this->pwm_setServoPosition(4, i);
         this->pwm_setServoPosition(5, angle-i);
     }
-    brasBaisse = true;
+    brasBaisse = 0;
 }
 
+void MyTCPClient::mid_bras(bool force) {
+    if (brasBaisse == 1 && !force){
+        return;
+    }
+    int angle = 102;
+    for (int i = 1; i <= angle;i++){
+        usleep(5'000);
+        this->pwm_setServoPosition(4, angle-i);
+        this->pwm_setServoPosition(5, i);
+    }
+    brasBaisse = 1;
+}
+
+
 void MyTCPClient::lever_bras(bool force) {
-    if (!brasBaisse && !force){
+    if (!brasBaisse == 2 && !force){
         return;
     }
     int angle = 107;
@@ -101,7 +120,7 @@ void MyTCPClient::lever_bras(bool force) {
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
     }
-    brasBaisse = false;
+    brasBaisse = 2;
 }
 
 void MyTCPClient::fermer_pince(int pince, bool force) {
