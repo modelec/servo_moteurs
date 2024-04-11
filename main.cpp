@@ -12,28 +12,8 @@ int main(int argc, char* argv[]) {
 
     client.sendMessage("servo_moteur;strat;ready;1");
 
-    while (true) {
-        std::string message;
-        std::getline(std::cin, message);
-
-        if (message == "quit") {
-            client.stop();
-            break;
-        }
-        if (message == "clear") {
-            client.pwm_clear();
-        }
-        else if (message == "close") {
-            client.fermer_pince(0);
-            client.fermer_pince(1);
-            client.fermer_pince(2);
-        } else if (message == "baisser") {
-            client.baisser_bras();
-        } else if (message == "lever") {
-            client.lever_bras();
-        }
-
-        client.sendMessage(message.c_str());
+    while (!client.shouldStop()) {
+        usleep(100'000);
     }
 
     return 0;

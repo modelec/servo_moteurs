@@ -13,13 +13,12 @@ void MyTCPClient::handleMessage(const std::string &message) {
     }
 
     if (token[1] == "servo_moteur" || token[1] == "all") {
-        std::cout << message << std::endl;
+        // std::cout << message << std::endl;
         if (token[2] == "ping") {
             this->sendMessage("servo_moteur;ihm;pong;1");
         }
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
-            std::cout << "ouvrir pince : " << pince << std::endl;
             this->ouvrir_pince(pince);
         }
         else if (token[2] == "fermer pince") {
@@ -126,7 +125,7 @@ void MyTCPClient::fermer_pince(int pince, bool force) {
     	    old_angle = 130;
         break;
     }
-    std::cout << "Fermer pince : " << pince << std::endl;
+    // std::cout << "Fermer pince : " << pince << std::endl;
     for(int i = old_angle; i <= angle;i++){
     	this->pwm_setServoPosition(pince, i);
     	usleep(5'000);
@@ -156,7 +155,7 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
 	        old_angle = 152;
         break;
     }
-    std::cout << "Ouvrir pince : " << pince << std::endl;
+    // std::cout << "Ouvrir pince : " << pince << std::endl;
     for (int i = old_angle; i >= angle;i--){
     	this->pwm_setServoPosition(pince, i);
 	usleep(5'000);
