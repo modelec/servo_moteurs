@@ -24,7 +24,7 @@ public:
 
     void baisser_bras(bool force = false);
 
-    void mid_bras(bool force = false);
+    // void mid_bras(bool force = false);
 
     void lever_bras(bool force = false);
 
