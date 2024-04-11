@@ -100,7 +100,7 @@ void MyTCPClient::mid_bras(bool force) {
     if (brasBaisse == 1 && !force){
         return;
     }
-    int angle = 110;
+    int angle = 90;
     for (int i = 1; i <= angle;i++){
         usleep(5'000);
         this->pwm_setServoPosition(4, i);
