@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 
     client.start();
 
-    client.sendMessage("servo_pot;strat;ready;1");
+    client.sendMessage("servo_moteur;strat;ready;1");
 
     while (true) {
         std::string message;
