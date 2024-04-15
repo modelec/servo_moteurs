@@ -24,15 +24,15 @@ public:
 
     void pwm_setServoPosition(int servo, int position);
 
-    void baisser_bras(bool force = false);
+ //   void baisser_bras(bool force = false);
     
- //   void baisser_bras();
+    void baisser_bras();
 
     void transport_bras();
 
-    void lever_bras(bool force = false);
+//    void lever_bras(bool force = false);
     
-//    void lever_bras();
+    void lever_bras();
 
     void fermer_pince(int pince, bool force = false);
 
