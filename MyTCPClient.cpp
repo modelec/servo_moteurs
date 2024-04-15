@@ -81,24 +81,26 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
     pca.set_pwm(servo, 0, on_time);
 }
 
-/*void MyTCPClient::baisser_bras() {
-    int angle;
+void MyTCPClient::baisser_bras() {
+    int angle = 5;
+    int begin_angle;
     switch(this->positionBras){
         case BRAS_HAUT:
-                angle = 100;
+                begin_angle = 107;
                 break;
         case BRAS_TRANSPORT:
-                angle = 17;
+                begin_angle = 17;
                 break;
     }
     this->positionBras = BRAS_BAS;
-    for (int i = 1; i <= angle;i++){
+    for (int i = begin_angle; i <= angle;i--){
         usleep(5'000);
-        this->pwm_setServoPosition(4, i);
-        this->pwm_setServoPosition(5, angle-i);
+        this->pwm_setServoPosition(4, angle-i);
+        this->pwm_setServoPosition(5, i);
     }
-}*/
-void MyTCPClient::baisser_bras(bool force) {
+}
+
+/*void MyTCPClient::baisser_bras(bool force) {
     if (brasBaisse == 0 && !force){
         return;
     }
@@ -110,49 +112,51 @@ void MyTCPClient::baisser_bras(bool force) {
     }
     this->positionBras = BRAS_BAS; 
     brasBaisse = 0;
-}
+}*/
 
 void MyTCPClient::transport_bras(){
-    int angle;
+    int begin_angle;
+    int angle = 17;
     switch(this->positionBras){
         case BRAS_BAS:
-                angle  = 17;
-                for (int i = 1; i <= angle; i++){
+                begin_angle = 5;
+                for (int i = begin_angle; i <= angle; i++){
                         usleep(5'000);
                         this->pwm_setServoPosition(4, angle-i);
                         this->pwm_setServoPosition(5, i);
                 }
                 break;
         case BRAS_HAUT:
-                angle = 90;
-                for (int i = 1; i <= angle; i++){
+                begin_angle = 107;
+                for (int i = begin_angle; i <= angle; i--){
                         usleep(5'000);
-                        this->pwm_setServoPosition(4, i);
-                        this->pwm_setServoPosition(5, angle-i);
+                        this->pwm_setServoPosition(4, angle-i);
+                        this->pwm_setServoPosition(5, i);
                 }
                 break;
     }
     this->positionBras = BRAS_TRANSPORT;
 }
-/*
+
 void MyTCPClient::lever_bras() {
-    int angle;
+    int begin_angle;
+    int angle = 107;
     switch(this->positionBras){
         case BRAS_BAS:
-                angle = 107;
+		begin_angle = 5;
                 break;
         case BRAS_TRANSPORT:
-                angle = 90;
+		begin_angle = 17;
                 break;
     }
     this->positionBras = BRAS_HAUT;
-  for (int i = 1; i <= angle;i++){
+  for (int i = begin_angle; i <= angle;i++){
         usleep(5'000);
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
   }  
 }
-*/
+/*
 void MyTCPClient::lever_bras(bool force) {
     if (!brasBaisse == 2 && !force){
         return;
@@ -166,7 +170,7 @@ void MyTCPClient::lever_bras(bool force) {
     brasBaisse = 2;
     this->positionBras = BRAS_HAUT;
 }
-
+*/
 void MyTCPClient::fermer_pince(int pince, bool force) {
     if (!pinceOuverte[pince] && !force){
         return;
