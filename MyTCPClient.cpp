@@ -33,7 +33,9 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->baisser_bras();
         }
         else if(token[2] == "transport bras"){
-            this->transport_bras();
+            this->fermer_pince(0);
+	    this->fermer_pince(2);
+	    this->transport_bras();
         } 
          else if (token[2] == "lever bras") {
             this->fermer_pince(0);
