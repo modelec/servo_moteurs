@@ -93,7 +93,7 @@ void MyTCPClient::baisser_bras() {
                 break;
     }
     this->positionBras = BRAS_BAS;
-    for (int i = begin_angle; i <= angle;i--){
+    for (int i = begin_angle; i >= angle;i--){
         usleep(5'000);
         this->pwm_setServoPosition(4, angle-i);
         this->pwm_setServoPosition(5, i);
@@ -128,7 +128,7 @@ void MyTCPClient::transport_bras(){
                 break;
         case BRAS_HAUT:
                 begin_angle = 107;
-                for (int i = begin_angle; i <= angle; i--){
+                for (int i = begin_angle; i >= angle; i--){
                         usleep(5'000);
                         this->pwm_setServoPosition(4, angle-i);
                         this->pwm_setServoPosition(5, i);
