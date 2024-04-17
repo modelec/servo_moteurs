@@ -59,5 +59,5 @@ private:
     bool pinceOuverte[3] = {true, true, true};
     angleBras angleBrasBas = {102, 5};
     angleBras angleBrasTransport = {90, 17};//servo4 à 83
-    angleBras angleBrasHaut = {-9, 117};//1, 107
+    angleBras angleBrasHaut = {-19, 127};//1, 107
 };
