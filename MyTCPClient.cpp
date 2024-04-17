@@ -56,9 +56,8 @@ void MyTCPClient::handleMessage(const std::string &message) {
                 return;
             }
             int servo = std::stoi(args[0]);
-            double angleRad = std::stof(args[1]) / 100;
-            int angleDeg = static_cast<int>(angleRad * 180 / 3.14159);
-            this->pwm_setServoPosition(servo, angleDeg);
+            double angle = std::stof(args[1]);
+            this->pwm_setServoPosition(servo, angle);
         } else if (token[2] == "clear") {
             this->pwm_clear();
         }
