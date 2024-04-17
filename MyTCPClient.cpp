@@ -134,14 +134,14 @@ void MyTCPClient::lever_bras() {
         case BRAS_BAS:
 		    for (int i = angleBrasBas.servo5;i <= angleBrasHaut.servo5;i++){
                 this->pwm_setServoPosition(4, angleBrasBas.servo4-i-angleBrasBas.servo5);
-                this->pwm_setServoPosition(5, i)
+                this->pwm_setServoPosition(5, i);
                 usleep(5'000);
             }
             break;
         case BRAS_TRANSPORT:
             for (int i = angleBrasTransport.servo5;i <= angleBrasHaut.servo5;i++){
                 this->pwm_setServoPosition(4, angleBrasTransport.servo4-i-angleBrasTransport.servo5);
-                this->pwm_setServoPosition(5, i)
+                this->pwm_setServoPosition(5, i);
                 usleep(5'000);
             }
             break;
