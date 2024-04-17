@@ -123,8 +123,9 @@ void MyTCPClient::transport_bras(){
                 this->pwm_setServoPosition(5, angleBrasHaut.servo5-i-angleBrasHaut.servo4);
             }
             break;
-        default:
-            return;
+        case BRAS_TRANSPORT:
+            this->pwm_setServoPosition(4, angleBrasTransport.servo4);
+            this->pwm_setServoPosition(5, angleBrasTransport.servo5);
     }
     this->positionBras = BRAS_TRANSPORT;
 }
@@ -145,8 +146,9 @@ void MyTCPClient::lever_bras() {
                 usleep(5'000);
             }
             break;
-        default:
-            return;
+        case BRAS_HAUT:
+            this->pwm_setServoPosition(4, angleBrasHaut.servo4);
+            this->pwm_setServoPosition(5, angleBrasHaut.servo5);
     }
     this->positionBras = BRAS_HAUT;
 }
