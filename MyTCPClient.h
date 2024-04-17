@@ -16,6 +16,15 @@ enum BrasState {
     BRAS_TRANSPORT
 };
 
+typedef struct {
+    int servo4;
+    int servo5;
+}angleBras;
+
+angleBras angleBrasBas = {102, 5};
+angleBras angleBrasTransport = {90, 17};//servo4 à 83
+angleBras angleBrasHaut = {0, 107};
+
 class MyTCPClient : public TCPClient {
 public:
     explicit MyTCPClient(const char* serverIP = "127.0.0.1", int port = 8080);
