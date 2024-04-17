@@ -23,7 +23,7 @@ typedef struct {
 
 angleBras angleBrasBas = {102, 5};
 angleBras angleBrasTransport = {90, 17};//servo4 à 83
-angleBras angleBrasHaut = {0, 107};
+angleBras angleBrasHaut = {1, 107};
 
 class MyTCPClient : public TCPClient {
 public:
