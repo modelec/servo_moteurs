@@ -21,10 +21,6 @@ typedef struct {
     int servo5;
 }angleBras;
 
-angleBras angleBrasBas = {102, 5};
-angleBras angleBrasTransport = {90, 17};//servo4 à 83
-angleBras angleBrasHaut = {1, 107};
-
 class MyTCPClient : public TCPClient {
 public:
     explicit MyTCPClient(const char* serverIP = "127.0.0.1", int port = 8080);
@@ -61,5 +57,7 @@ private:
     PiPCA9685::PCA9685 pca;
     BrasState positionBras = BRAS_BAS;
     bool pinceOuverte[3] = {true, true, true};
-    int brasBaisse = 0;
+    angleBras angleBrasBas = {102, 5};
+    angleBras angleBrasTransport = {90, 17};//servo4 à 83
+    angleBras angleBrasHaut = {1, 107};
 };
