@@ -102,9 +102,11 @@ void MyTCPClient::baisser_bras() {
         case BRAS_BAS:
             this->pwm_setServoPosition(4, angleBrasBas.servo4);
             this->pwm_setServoPosition(5, angleBrasBas.servo5);
-            break;
+            return;
     }
     this->positionBras = BRAS_BAS;
+    this->pwm_setServoPosition(4, angleBrasBas.servo4);
+    this->pwm_setServoPosition(5, angleBrasBas.servo5);
 }
 
 void MyTCPClient::transport_bras(){
@@ -126,8 +128,11 @@ void MyTCPClient::transport_bras(){
         case BRAS_TRANSPORT:
             this->pwm_setServoPosition(4, angleBrasTransport.servo4);
             this->pwm_setServoPosition(5, angleBrasTransport.servo5);
+            return;
     }
     this->positionBras = BRAS_TRANSPORT;
+    this->pwm_setServoPosition(4, angleBrasTransport.servo4);
+    this->pwm_setServoPosition(5, angleBrasTransport.servo5);
 }
 
 void MyTCPClient::lever_bras() {
@@ -149,8 +154,11 @@ void MyTCPClient::lever_bras() {
         case BRAS_HAUT:
             this->pwm_setServoPosition(4, angleBrasHaut.servo4);
             this->pwm_setServoPosition(5, angleBrasHaut.servo5);
+            return;
     }
     this->positionBras = BRAS_HAUT;
+    this->pwm_setServoPosition(4, angleBrasHaut.servo4);
+    this->pwm_setServoPosition(5, angleBrasHaut.servo5);
 }
 
 void MyTCPClient::fermer_pince(int pince, bool force) {
