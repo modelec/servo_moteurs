@@ -57,7 +57,7 @@ private:
     PiPCA9685::PCA9685 pca;
     BrasState positionBras = BRAS_BAS;
     bool pinceOuverte[3] = {true, true, true};
-    angleBras angleBrasBas = {102, 5};
-    angleBras angleBrasTransport = {90, 17};//servo4 à 83
-    angleBras angleBrasHaut = {1, 107};//-19, 127
+    angleBras angleBrasBas = {0, 180};
+    angleBras angleBrasTransport = {12, 168};//servo4 à 83
+    angleBras angleBrasHaut = {102, 78};//-19, 127
 };
