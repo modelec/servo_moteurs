@@ -222,11 +222,11 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
 
 
 void MyTCPClient::check_panneau(int quelBras) {
-    this->pwm_setServoPosition(quelBras, 30);
+    this->pwm_setServoPosition(quelBras, 25);
 }
 
 void MyTCPClient::uncheck_panneau(int quelBras) {
-    this->pwm_setServoPosition(quelBras, 0);
+    this->pwm_setServoPosition(quelBras, 7);
 }
 
 void MyTCPClient::pwm_clear() {
