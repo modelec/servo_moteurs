@@ -9,6 +9,9 @@
 
 #define SERVO_MIN    82 // 0.02*4096
 #define SERVO_MAX    492 // 0.12*4096
+#define PANO_HAUT    25
+#define PANO_BAS     5
+
 
 enum BrasState {
     BRAS_BAS,
