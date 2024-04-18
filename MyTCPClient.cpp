@@ -34,9 +34,9 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if(token[2] == "transport bras"){
             this->fermer_pince(0);
-	    this->fermer_pince(2);
-	    this->transport_bras();
-        } 
+    	    this->fermer_pince(2);
+	        this->transport_bras();
+        }
          else if (token[2] == "lever bras") {
             this->fermer_pince(0);
             this->fermer_pince(2);
@@ -85,10 +85,15 @@ void MyTCPClient::pwm_setServoPosition(int servo, int position) {
 void MyTCPClient::baisser_bras() {
     switch(this->positionBras){
         case BRAS_HAUT:
-            for(int i = angleBrasHaut.servo4; i <= angleBrasBas.servo4;i++){
+            /*for(int i = angleBrasHaut.servo4; i <= angleBrasBas.servo4;i++){
                 this->pwm_setServoPosition(4, i);
                 usleep(5'000);
                 this->pwm_setServoPosition(5, angleBrasHaut.servo5-i-angleBrasHaut.servo4);
+            }*/
+            for (int i = angleBrasHaut.servo5;i >= angleBrasBas.servo5;i--){
+                this->pwm_setServoPosition(4, angleBrasBas.servo4-i-angleBrasBas.servo5);
+                usleep(5'000);
+                this->pwm_setServoPosition(5, i);
             }
             break;
         case BRAS_TRANSPORT:
