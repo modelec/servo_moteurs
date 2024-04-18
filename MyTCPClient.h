@@ -58,6 +58,6 @@ private:
     BrasState positionBras = BRAS_BAS;
     bool pinceOuverte[3] = {true, true, true};
     angleBras angleBrasBas = {180, 0};
-    angleBras angleBrasTransport = {168, 12};//servo4 à 83
-    angleBras angleBrasHaut = {78, 102};//-19, 127
+    angleBras angleBrasTransport = {168, 12};
+    angleBras angleBrasHaut = {68, 112};//78, 102
 };
