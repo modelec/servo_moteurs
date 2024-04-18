@@ -59,5 +59,5 @@ private:
     bool pinceOuverte[3] = {true, true, true};
     angleBras angleBrasBas = {180, 0};
     angleBras angleBrasTransport = {168, 12};
-    angleBras angleBrasHaut = {58, 122};//78, 102
+    angleBras angleBrasHaut = {53, 127};//78, 102
 };
