@@ -88,14 +88,14 @@ void MyTCPClient::baisser_bras() {
             for(int i = angleBrasHaut.servo4; i <= angleBrasBas.servo4;i++){
                 this->pwm_setServoPosition(4, i);
                 usleep(5'000);
-                this->pwm_setServoPosition(5, angleBrasHaut.servo5-i-angleBrasHaut.servo4);
+                this->pwm_setServoPosition(5, angleBrasHaut.servo5-i+angleBrasHaut.servo4);
             }
             break;
         case BRAS_TRANSPORT:
             for(int i = angleBrasTransport.servo4; i <= angleBrasBas.servo4;i++){
                 this->pwm_setServoPosition(4, i);
                 usleep(5'000);
-                this->pwm_setServoPosition(5, angleBrasTransport.servo5-i-angleBrasTransport.servo4);
+                this->pwm_setServoPosition(5, angleBrasTransport.servo5-i+angleBrasTransport.servo4);
             }
             break;
         case BRAS_BAS:
@@ -112,7 +112,7 @@ void MyTCPClient::transport_bras(){
     switch(this->positionBras){
         case BRAS_BAS:
             for (int i = angleBrasBas.servo5; i <= angleBrasTransport.servo5; i++){
-                this->pwm_setServoPosition(4, angleBrasBas.servo4-i-angleBrasBas.servo5);
+                this->pwm_setServoPosition(4, angleBrasBas.servo4-i+angleBrasBas.servo5);
                 usleep(5'000);
                 this->pwm_setServoPosition(5, i);
             }
@@ -121,7 +121,7 @@ void MyTCPClient::transport_bras(){
             for (int i = angleBrasHaut.servo4; i <= angleBrasTransport.servo4; i++){
                 this->pwm_setServoPosition(4, i);
                 usleep(5'000);
-                this->pwm_setServoPosition(5, angleBrasHaut.servo5-i-angleBrasHaut.servo4);
+                this->pwm_setServoPosition(5, angleBrasHaut.servo5-i+angleBrasHaut.servo4);
             }
             break;
         case BRAS_TRANSPORT:
@@ -138,14 +138,14 @@ void MyTCPClient::lever_bras() {
     switch(this->positionBras){
         case BRAS_BAS:
 		    for (int i = angleBrasBas.servo5;i <= angleBrasHaut.servo5;i++){
-                this->pwm_setServoPosition(4, angleBrasBas.servo4-i-angleBrasBas.servo5);
+                this->pwm_setServoPosition(4, angleBrasBas.servo4-i+angleBrasBas.servo5);
                 usleep(5'000);
                 this->pwm_setServoPosition(5, i);
             }
             break;
         case BRAS_TRANSPORT:
             for (int i = angleBrasTransport.servo5;i <= angleBrasHaut.servo5;i++){
-                this->pwm_setServoPosition(4, angleBrasTransport.servo4-i-angleBrasTransport.servo5);
+                this->pwm_setServoPosition(4, angleBrasTransport.servo4-i+angleBrasTransport.servo5);
                 usleep(5'000);
                 this->pwm_setServoPosition(5, i);
             }
