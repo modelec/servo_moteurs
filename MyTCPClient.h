@@ -19,10 +19,22 @@ enum BrasState {
     BRAS_TRANSPORT
 };
 
+enum PinceState {
+    PINCE_OUVERTE,
+    PINCE_MIDDLE,
+    PINCE_FERMER
+};
+
 typedef struct {
     int servo4;
     int servo5;
 }angleBras;
+
+typedef struct {
+    int fermer;
+    int middle;
+    int ouverte;
+}anglePince;
 
 class MyTCPClient : public TCPClient {
 public:
@@ -36,14 +48,10 @@ public:
 
     void pwm_setServoPosition(int servo, int position);
 
- //   void baisser_bras(bool force = false);
-    
     void baisser_bras();
 
     void transport_bras();
 
-//    void lever_bras(bool force = false);
-    
     void lever_bras();
 
     void fermer_pince(int pince, bool force = false);
@@ -59,8 +67,13 @@ public:
 private:
     PiPCA9685::PCA9685 pca;
     BrasState positionBras = BRAS_BAS;
-    bool pinceOuverte[3] = {true, true, true};
-    angleBras angleBrasBas = {180, 0};
-    angleBras angleBrasTransport = {168, 12};
-    angleBras angleBrasHaut = {53, 127};//78, 102
+    int etatPince[3] = {PINCE_OUVERTE, PINCE_OUVERTE, PINCE_OUVERTE};
+
+    const angleBras angleBrasBas = {180, 0};
+    const angleBras angleBrasTransport = {168, 12};
+    const angleBras angleBrasHaut = {53, 127};//78, 102
+
+    const anglePince anglePince0 = {142, 129, 115};//Ecart -27
+    const anglePince anglePince1 = {42, 32, 22};//Ecart -20
+    const anglePince anglePince2 = {152, 141, 130};//Ecart -22
 };

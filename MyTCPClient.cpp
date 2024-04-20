@@ -161,63 +161,112 @@ void MyTCPClient::lever_bras() {
 }
 
 void MyTCPClient::fermer_pince(int pince, bool force) {
-    if (!pinceOuverte[pince] && !force){
-        return;
-    }
-    int angle, old_angle;
-    if (pince < 0 || pince > 2){
+    anglePince pinceChoisie;
+    int angleDebut;
+    if ((etatPince[pince] == PINCE_FERMER && !force) || pince < 0 || pince > 2){
         return;
     }
     switch(pince){
         case 0:
-            angle = 142;
-                old_angle = 115;
-        break;
+            pinceChoisie = anglePince0;
+            break;
         case 1:
-            angle = 42;
-                old_angle = 22;
-        break;
+            pinceChoisie = anglePince1;
+            break;
         case 2:
-            angle = 152;
-            old_angle = 130;
-        break;
+            pinceChoisie = anglePince2;
+            break;
+    }
+    switch (etatPince[pince]) {
+        case PINCE_FERMER:
+            this->pwm_setServoPosition(pince, pinceChoisie.fermer)
+            return;
+        case PINCE_MIDDLE:
+            angleDebut = pinceChoisie.middle;
+            break;
+        case PINCE_OUVERTE:
+            angleDebut = pinceChoisie.ouverte;
+            break;
     }
     std::cout << "Fermer pince : " << pince << std::endl;
-    for(int i = old_angle; i <= angle;i++){
+    for(int i = angleDebut; i <= pinceChoisie.fermer;i++){
         this->pwm_setServoPosition(pince, i);
         usleep(5'000);
     }
-    pinceOuverte[pince] = false;
+    etatPince[pince] = PINCE_FERMER;
+}
+
+void MyTCPClient::middle_pince(int pince, bool force){
+    anglePince pinceChoisie;
+    if ((etatPince[pince] == PINCE_MIDDLE && !force) || pince < 0 || pince > 2){
+        return;
+    }
+    switch(pince){
+        case 0:
+            pinceChoisie = anglePince0;
+            break;
+        case 1:
+            pinceChoisie = anglePince1;
+            break;
+        case 2:
+            pinceChoisie = anglePince2;
+            break;
+    }
+    std::cout << "Middle pince : " << pince << std::endl;
+    switch (etatPince[pince]) {
+        case PINCE_OUVERTE:
+            for(int i = pinceChoisie.ouverte; i <= pinceChoisie.middle;i++){
+                this->pwm_setServoPosition(pince, i);
+                usleep(5'000);
+            }
+            break;
+        case PINCE_MIDDLE:
+            this->pwm_setServoPosition(pince, pinceChoisie.middle);
+            return;
+        case PINCE_FERMER:
+            for (int i = pinceChoisie.fermer; i >= pinceChoisie.middle;i--){
+                this->pwm_setServoPosition(pince, i);
+                usleep(5'000);
+            }
+            break;
+    }
+    etatPince[pince] = PINCE_OUVERTE;
 }
 
 void MyTCPClient::ouvrir_pince(int pince, bool force) {
-    if (pinceOuverte[pince] && !force){
-        return;
-    }
-    int angle, old_angle;
-    if (pince < 0 || pince > 2){
+    anglePince pinceChoisie;
+    int angleDebut;
+    if ((etatPince[pince] == PINCE_OUVERTE && !force) || pince < 0 || pince > 2){
         return;
     }
     switch(pince){
         case 0:
-            angle = 115;
-                old_angle = 142;
-        break;
+            pinceChoisie = anglePince0;
+            break;
         case 1:
-            angle = 22;
-                old_angle = 42;
-        break;
+            pinceChoisie = anglePince1;
+            break;
         case 2:
-            angle = 130;
-                old_angle = 152;
-        break;
+            pinceChoisie = anglePince2;
+            break;
+    }
+    switch (etatPince[pince]) {
+        case PINCE_FERMER:
+            angleDebut = pinceChoisie.fermer;
+            break;
+        case PINCE_MIDDLE:
+            angleDebut = pinceChoisie.middle;
+            break;
+        case PINCE_OUVERTE:
+            this->pwm_setServoPosition(pince, pinceChoisie.ouverte)
+            return;
     }
     std::cout << "Ouvrir pince : " << pince << std::endl;
-    for (int i = old_angle; i >= angle;i--){
+    for (int i = angleDebut; i >= pinceChoisie.ouverte;i--){
         this->pwm_setServoPosition(pince, i);
         usleep(5'000);
     }
-    pinceOuverte[pince] = true;
+    etatPince[pince] = PINCE_OUVERTE;
 }
 
 
