@@ -103,7 +103,7 @@ void MyTCPClient::baisser_bras() {
     }
     this->positionBras = BRAS_BAS;
     this->pwm_setServoPosition(4, angleBrasBas.servo4);
-    this->pwm_setServoPosition(5, angleBrasBas.servo5)
+    this->pwm_setServoPosition(5, angleBrasBas.servo5);
 }
 
 void MyTCPClient::transport_bras(){
@@ -175,7 +175,7 @@ void MyTCPClient::fermer_pince(int pince, bool force) {
     }
     switch (etatPince[pince]) {
         case PINCE_FERMER:
-            this->pwm_setServoPosition(pince, pinceChoisie.fermer)
+            this->pwm_setServoPosition(pince, pinceChoisie.fermer);
             return;
         case PINCE_MIDDLE:
             angleDebut = pinceChoisie.middle;
@@ -254,7 +254,7 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
             angleDebut = pinceChoisie.middle;
             break;
         case PINCE_OUVERTE:
-            this->pwm_setServoPosition(pince, pinceChoisie.ouverte)
+            this->pwm_setServoPosition(pince, pinceChoisie.ouverte);
             return;
     }
     std::cout << "Ouvrir pince : " << pince << std::endl;
