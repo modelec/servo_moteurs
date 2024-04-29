@@ -58,6 +58,8 @@ public:
 
     void ouvrir_pince(int pince, bool force = false);
 
+    void middle_pince(int pince, bool force = false);
+
     void check_panneau(int quelBras);
 
     void uncheck_panneau(int quelBras);
