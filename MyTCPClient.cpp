@@ -76,6 +76,7 @@ void MyTCPClient::pwm_init() {
     this->baisser_bras();//this->baisser_bras(true);
     this->uncheck_panneau(6);
     this->uncheck_panneau(7);
+    this->pwm_clear();
 }
 
 
