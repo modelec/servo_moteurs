@@ -36,6 +36,11 @@ typedef struct {
     int ouverte;
 }anglePince;
 
+typedef struct {
+    int check;
+    int uncheck;
+}anglePanneau;
+
 class MyTCPClient : public TCPClient {
 public:
     explicit MyTCPClient(const char* serverIP = "127.0.0.1", int port = 8080);
@@ -78,4 +83,7 @@ private:
     const anglePince anglePince0 = {142, 129, 115};//Ecart -27
     const anglePince anglePince1 = {42, 32, 22};//Ecart -20
     const anglePince anglePince2 = {152, 141, 130};//Ecart -22
+
+    const anglePanneau anglePanneauGauche = {PANO_HAUT, PANO_BAS};
+    const anglePanneau anglePanneauDroit = {PANO_BAS, PANO_HAUT};
 };
