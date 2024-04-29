@@ -74,8 +74,8 @@ void MyTCPClient::pwm_init() {
     this->fermer_pince(1, true);
     this->fermer_pince(2, true);
     this->baisser_bras();//this->baisser_bras(true);
-    // this->uncheck_panneau(6);
-    // this->uncheck_panneau(7);
+    this->uncheck_panneau(6);
+    this->uncheck_panneau(7);
 }
 
 
