@@ -268,14 +268,17 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
 
 void MyTCPClient::check_panneau(int quelBras) {
     std::cout << "Check panneau : " << quelBras << std::endl;
+    for (int i = PANO_BAS; i <= PANO_HAUT;i++){
+        this->pwm_setServoPosition(quelBras, i);
+    }
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.uncheck; i <= anglePanneauGauche.check;i++){
+            for (int i = anglePanneauGauche.check; i <= anglePanneauGauche.uncheck;i++){
                 this->pwm_setServoPosition(quelBras, i);
             }
         break;
         case 7:
-            for (int i = anglePanneauDroit.uncheck; i <= anglePanneauDroit.check;i++){
+            for (int i = anglePanneauDroit.check; i <= anglePanneauDroit.uncheck;i++){
                 this->pwm_setServoPosition(quelBras, i);
             }
         break;
@@ -285,15 +288,14 @@ void MyTCPClient::check_panneau(int quelBras) {
 }
 
 void MyTCPClient::uncheck_panneau(int quelBras) {
-    std::cout << "Uncheck panneau : " << quelBras << std::endl;
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.uncheck; i >= anglePanneauGauche.check;i--){
+            for (int i = anglePanneauGauche.check; i >= anglePanneauGauche.uncheck;i--){
                 this->pwm_setServoPosition(quelBras, i);
             }
             break;
         case 7:
-            for (int i = anglePanneauDroit.uncheck; i >= anglePanneauDroit.check;i--){
+            for (int i = anglePanneauDroit.check; i >= anglePanneauDroit.uncheck;i--){
                 this->pwm_setServoPosition(quelBras, i);
             }
             break;
