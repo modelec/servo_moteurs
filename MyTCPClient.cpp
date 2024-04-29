@@ -74,6 +74,8 @@ void MyTCPClient::pwm_init() {
     this->fermer_pince(1, true);
     this->fermer_pince(2, true);
     this->baisser_bras();//this->baisser_bras(true);
+    // this->uncheck_panneau(6);
+    // this->uncheck_panneau(7);
 }
 
 
@@ -273,7 +275,7 @@ void MyTCPClient::check_panneau(int quelBras) {
     }
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.check; i <= anglePanneauGauche.uncheck;i++){
+            for (int i = anglePanneauGauche.check; i >= anglePanneauGauche.uncheck;i--){
                 this->pwm_setServoPosition(quelBras, i);
             }
         break;
@@ -288,9 +290,10 @@ void MyTCPClient::check_panneau(int quelBras) {
 }
 
 void MyTCPClient::uncheck_panneau(int quelBras) {
+    std::cout << "Uncheck panneau : " << quelBras << std::endl;
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.uncheck; i >= anglePanneauGauche.check;i--){
+            for (int i = anglePanneauGauche.uncheck; i <= anglePanneauGauche.check;i++){
                 this->pwm_setServoPosition(quelBras, i);
             }
             break;
