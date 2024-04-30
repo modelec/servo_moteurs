@@ -34,10 +34,10 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if(token[2] == "transport bras"){
             this->fermer_pince(0);
-	    this->fermer_pince(2);
-	    this->transport_bras();
+	        this->fermer_pince(2);
+	        this->transport_bras();
         } 
-         else if (token[2] == "lever bras") {
+        else if (token[2] == "lever bras") {
             this->fermer_pince(0);
             this->fermer_pince(2);
             this->lever_bras();
@@ -73,9 +73,6 @@ void MyTCPClient::pwm_init() {
     this->fermer_pince(0, true);
     this->fermer_pince(1, true);
     this->fermer_pince(2, true);
-    this->baisser_bras();//this->baisser_bras(true);
-    this->uncheck_panneau(6);
-    this->uncheck_panneau(7);
     this->pwm_clear();
 }
 
