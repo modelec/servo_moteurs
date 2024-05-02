@@ -19,13 +19,15 @@ void MyTCPClient::handleMessage(const std::string &message) {
         }
         else if (token[2] == "ouvrir pince") {
             int pince = std::stoi(token[3]);
-            std::cout << "ouvrir pince : " << pince << std::endl;
             this->ouvrir_pince(pince);
         }
         else if (token[2] == "fermer pince") {
             int pince = std::stoi(token[3]);
-
             this->fermer_pince(pince);
+        }
+        else if (token[2] == "middle pince") {
+            int pince = std::stoi(token[3]);
+            this->middle_pince(pince);
         }
         else if (token[2] == "baisser bras") {
             this->fermer_pince(0);
