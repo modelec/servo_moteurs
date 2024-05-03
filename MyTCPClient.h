@@ -80,9 +80,13 @@ private:
     const angleBras angleBrasTransport = {168, 12};
     const angleBras angleBrasHaut = {53, 127};//78, 102
 
-    const anglePince anglePince0 = {142, 129, 108};//Ecart -27
-    const anglePince anglePince1 = {42, 32, 15};//Ecart -20
-    const anglePince anglePince2 = {152, 141, 122};//Ecart -22
+    // const anglePince anglePince0 = {142, 129, 108};//Ecart -27
+    // const anglePince anglePince1 = {42, 32, 15};//Ecart -20
+    // const anglePince anglePince2 = {152, 141, 122};//Ecart -22
+
+    const anglePince anglePince0 = {142, 129, 118};//Ecart -27
+    const anglePince anglePince1 = {42, 32, 19};//Ecart -20
+    const anglePince anglePince2 = {152, 141, 125};//Ecart -22
 
     const anglePanneau anglePanneauGauche = {25, 5};
     const anglePanneau anglePanneauDroit = {5, 25};
