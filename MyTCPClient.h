@@ -22,7 +22,7 @@ enum BrasState {
 enum PinceState {
     PINCE_OUVERTE,
     PINCE_MIDDLE,
-    PINCE_FERMER
+    PINCE_FERMER,
 };
 
 typedef struct {
@@ -34,6 +34,7 @@ typedef struct {
     int fermer;
     int middle;
     int ouverte;
+    int fullyOuverte;
 }anglePince;
 
 typedef struct {
@@ -65,6 +66,8 @@ public:
 
     void middle_pince(int pince, bool force = false);
 
+    void ouvrir_total_pince(int pince, bool force = false);
+
     void check_panneau(int quelBras);
 
     void uncheck_panneau(int quelBras);
@@ -84,9 +87,9 @@ private:
     // const anglePince anglePince1 = {42, 32, 15};//Ecart -20
     // const anglePince anglePince2 = {152, 141, 122};//Ecart -22
 
-    const anglePince anglePince0 = {142, 129, 118};//Ecart -27
-    const anglePince anglePince1 = {42, 32, 19};//Ecart -20
-    const anglePince anglePince2 = {152, 141, 125};//Ecart -22
+    const anglePince anglePince0 = {142, 129, 118, 108};//Ecart -27
+    const anglePince anglePince1 = {42, 32, 19, 15};//Ecart -20
+    const anglePince anglePince2 = {152, 141, 125, 122};//Ecart -22
 
     const anglePanneau anglePanneauGauche = {25, 5};
     const anglePanneau anglePanneauDroit = {5, 25};

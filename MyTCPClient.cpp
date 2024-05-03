@@ -21,6 +21,10 @@ void MyTCPClient::handleMessage(const std::string &message) {
             int pince = std::stoi(token[3]);
             this->ouvrir_pince(pince);
         }
+        else if (token[2] == "ouvrir total pince") {
+            int pince = std::stoi(token[3]);
+            this->ouvrir_total_pince(pince);
+        }
         else if (token[2] == "fermer pince") {
             int pince = std::stoi(token[3]);
             this->fermer_pince(pince);
@@ -248,7 +252,7 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
             pinceChoisie = anglePince2;
             break;
     }
-    switch (etatPince[pince]) {
+    /*switch (etatPince[pince]) {
         case PINCE_FERMER:
             angleDebut = pinceChoisie.fermer;
             break;
@@ -263,10 +267,30 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
     for (int i = angleDebut; i >= pinceChoisie.ouverte;i--){
         this->pwm_setServoPosition(pince, i);
         usleep(5'000);
-    }
+    }*/
+    this->pwm_setServoPosition(pince, pinceChoisie.ouverte);
     etatPince[pince] = PINCE_OUVERTE;
 }
 
+void MyTCPClient::ouvrir_total_pince(int pince, bool force) {
+    anglePince pinceChoisie;
+    if ((etatPince[pince] == PINCE_FERMER && !force) || pince < 0 || pince > 2){
+        return;
+    }
+    switch(pince){
+        case 0:
+            pinceChoisie = anglePince0;
+        break;
+        case 1:
+            pinceChoisie = anglePince1;
+        break;
+        case 2:
+            pinceChoisie = anglePince2;
+        break;
+    }
+    this->pwm_setServoPosition(pince, pinceChoisie.fullyOuverte);
+    etatPince[pince] = PINCE_OUVERTE;
+}
 
 void MyTCPClient::check_panneau(int quelBras) {
     std::cout << "Check panneau : " << quelBras << std::endl;
