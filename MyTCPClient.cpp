@@ -236,6 +236,7 @@ void MyTCPClient::middle_pince(int pince, bool force){
 }
 
 void MyTCPClient::ouvrir_pince(int pince, bool force) {
+    std::cout << "Ouvrir pince : " << pince << std::endl;
     anglePince pinceChoisie;
     int angleDebut;
     if ((etatPince[pince] == PINCE_OUVERTE && !force) || pince < 0 || pince > 2){
@@ -273,6 +274,7 @@ void MyTCPClient::ouvrir_pince(int pince, bool force) {
 }
 
 void MyTCPClient::ouvrir_total_pince(int pince, bool force) {
+    std::cout << "Ouvrir total pince : " << pince << std::endl;
     anglePince pinceChoisie;
     if ((etatPince[pince] == PINCE_FERMER && !force) || pince < 0 || pince > 2){
         return;
