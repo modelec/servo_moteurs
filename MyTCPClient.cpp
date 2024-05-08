@@ -299,14 +299,10 @@ void MyTCPClient::check_panneau(int quelBras) {
     std::cout << "Check panneau : " << quelBras << std::endl;
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.uncheck; i <= anglePanneauGauche.check;i++){
-                this->pwm_setServoPosition(quelBras, i);
-            }
+            this->pwm_setServoPosition(quelBras, anglePanneauGauche.check);
         break;
         case 7:
-            for (int i = anglePanneauDroit.check; i <= anglePanneauDroit.uncheck;i++){
-                this->pwm_setServoPosition(quelBras, i);
-            }
+            this->pwm_setServoPosition(quelBras, anglePanneauDroit.check);
         break;
         default:
             break;
@@ -317,15 +313,11 @@ void MyTCPClient::uncheck_panneau(int quelBras) {
     std::cout << "Uncheck panneau : " << quelBras << std::endl;
     switch (quelBras) {
         case 6:
-            for (int i = anglePanneauGauche.check; i >= anglePanneauGauche.uncheck;i--){
-                this->pwm_setServoPosition(quelBras, i);
-            }
-            break;
+            this->pwm_setServoPosition(quelBras, anglePanneauGauche.uncheck);
+        break;
         case 7:
-            for (int i = anglePanneauDroit.uncheck; i >= anglePanneauDroit.check;i--){
-                this->pwm_setServoPosition(quelBras, i);
-            }
-            break;
+            this->pwm_setServoPosition(quelBras, anglePanneauDroit.uncheck);
+        break;
         default:
             break;
     }
