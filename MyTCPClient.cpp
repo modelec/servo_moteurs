@@ -307,7 +307,7 @@ void MyTCPClient::check_panneau(int quelBras) {
             }
         break;
         case 7:
-            for (int i = anglePanneauDroit.check; i >= anglePanneauDroit.uncheck;i++){
+            for (int i = anglePanneauDroit.uncheck; i <= anglePanneauDroit.check;i++){
                 this->pwm_setServoPosition(quelBras, i);
             }
         break;
@@ -325,7 +325,7 @@ void MyTCPClient::uncheck_panneau(int quelBras) {
             }
             break;
         case 7:
-            for (int i = anglePanneauDroit.uncheck; i <= anglePanneauDroit.check;i--){
+            for (int i = anglePanneauDroit.check; i >= anglePanneauDroit.uncheck;i--){
                 this->pwm_setServoPosition(quelBras, i);
             }
             break;
