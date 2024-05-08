@@ -21,11 +21,12 @@ int main(int argc, char* argv[]) {
     try{
         client.start();
 
-        while(!client.shouldStop()){
+        client.sendMessage("servo_moteur;strat;ready;1");
+
+        while(!client.shouldStop() && !shouldStop){
             usleep(100'000);
         }
 
-        client.sendMessage("servo_moteur;strat;ready;1");
     }
     catch (const std::exception& e){
         std::cerr << e.what() << std::endl;

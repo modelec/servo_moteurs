@@ -76,6 +76,7 @@ void MyTCPClient::pwm_setFrequency(float freq) {
 
 void MyTCPClient::pwm_init() {
     pwm_setFrequency(50.0);
+    this->pwm_clear();
     this->fermer_pince(0, true);
     this->fermer_pince(1, true);
     this->fermer_pince(2, true);
