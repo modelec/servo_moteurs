@@ -55,8 +55,6 @@ void MyTCPClient::handleMessage(const std::string &message) {
         else if (token[2] == "uncheck panneau") {
             int bras = std::stoi(token[3]);
             this->uncheck_panneau(bras);
-            usleep(100'000);
-            this->pwm_setServoPosition(bras, 0);
         }
         else if (token[2] == "angle") {
             std::vector<std::string> args = TCPSocket::split(token[3], ",");
