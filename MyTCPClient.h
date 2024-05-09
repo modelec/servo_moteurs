@@ -91,6 +91,6 @@ private:
     const anglePince anglePince1 = {42, 32, 19, 15};//Ecart -20
     const anglePince anglePince2 = {152, 141, 125, 122};//Ecart -22
 
-    const anglePanneau anglePanneauGauche = {5, 25};
+    const anglePanneau anglePanneauGauche = {27, 40};
     const anglePanneau anglePanneauDroit = {25, 3};
 };
