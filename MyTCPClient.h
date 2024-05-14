@@ -72,6 +72,8 @@ public:
 
     void uncheck_panneau(int quelBras);
 
+    void percentage_panneau(int quelBras, int pourcentage);
+
     void pwm_clear();
 
 private:

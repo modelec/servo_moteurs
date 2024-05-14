@@ -56,6 +56,14 @@ void MyTCPClient::handleMessage(const std::string &message) {
             int bras = std::stoi(token[3]);
             this->uncheck_panneau(bras);
         }
+        else if (token[2] == "panneau") {
+            std::vector<std::string> args = TCPSocket::split(token[3], ",");
+
+            int bras = std::stoi(args[0]);
+            int pourcentage = std::stoi(args[1]);
+
+            this->percentage_panneau(bras, pourcentage);
+        }
         else if (token[2] == "angle") {
             std::vector<std::string> args = TCPSocket::split(token[3], ",");
             if (args.size() != 2) {
@@ -320,6 +328,20 @@ void MyTCPClient::uncheck_panneau(int quelBras) {
             break;
     }
 }
+
+void MyTCPClient::percentage_panneau(int quelBras, int pourcentage) {
+    switch (quelBras) {
+        case 6:
+            this->pwm_setServoPosition(quelBras, anglePanneauGauche.check + (anglePanneauGauche.uncheck - anglePanneauGauche.check) * pourcentage / 100);
+        break;
+        case 7:
+            this->pwm_setServoPosition(quelBras, anglePanneauDroit.check + (anglePanneauDroit.uncheck - anglePanneauDroit.check) * pourcentage / 100);
+        break;
+        default:
+            break;
+    }
+}
+
 
 void MyTCPClient::pwm_clear() {
     pca.set_all_pwm(0,0);
