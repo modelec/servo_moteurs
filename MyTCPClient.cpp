@@ -62,7 +62,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
             int bras = std::stoi(args[0]);
             int pourcentage = std::stoi(args[1]);
 
-            this->percentage_panneau(bras, pourcentage);
+            this->percentage_panneau(bras, 100 - pourcentage);
         }
         else if (token[2] == "angle") {
             std::vector<std::string> args = TCPSocket::split(token[3], ",");
