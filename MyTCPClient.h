@@ -1,7 +1,7 @@
 #pragma once
 
-#include "TCPSocket/TCPClient.hpp"
-#include "TCPSocket/TCPUtils.hpp"
+#include <Modelec/TCPClient.h>
+#include <Modelec/Utils.h>
 
 // #include "servo_motor.h"
 #include <PiPCA9685/PCA9685.h>

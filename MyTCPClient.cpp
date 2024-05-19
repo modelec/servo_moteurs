@@ -5,7 +5,7 @@ MyTCPClient::MyTCPClient(const char *serverIP, int port) : TCPClient(serverIP, p
 }
 
 void MyTCPClient::handleMessage(const std::string &message) {
-    std::vector<std::string> token = TCPSocket::split(message, ";");
+    std::vector<std::string> token = Modelec::split(message, ";");
 
     if (token.size() != 4) {
         std::cerr << "Message invalide: " << message << std::endl;
@@ -57,7 +57,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->uncheck_panneau(bras);
         }
         else if (token[2] == "panneau") {
-            std::vector<std::string> args = TCPSocket::split(token[3], ",");
+            std::vector<std::string> args = Modelec::split(token[3], ",");
 
             int bras = std::stoi(args[0]);
             int pourcentage = std::stoi(args[1]);
@@ -65,7 +65,7 @@ void MyTCPClient::handleMessage(const std::string &message) {
             this->percentage_panneau(bras, 100 - pourcentage);
         }
         else if (token[2] == "angle") {
-            std::vector<std::string> args = TCPSocket::split(token[3], ",");
+            std::vector<std::string> args = Modelec::split(token[3], ",");
             if (args.size() != 2) {
                 std::cerr << "Nombre d'arguments invalide" << std::endl;
                 return;
