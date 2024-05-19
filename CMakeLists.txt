@@ -7,6 +7,8 @@ find_package(PiPCA9685 REQUIRED)
 
 find_package(Modelec COMPONENTS
         TCPClient
+        Utils
+        CLParser
         REQUIRED
 )
 
@@ -15,5 +17,5 @@ add_executable(servo_motor
         MyTCPClient.h
         main.cpp)
 
-target_link_libraries(servo_motor TCPClient)
+target_link_libraries(servo_motor Modelec::TCPClient Modelec::Utils Modelec::CLParser)
 target_link_libraries(servo_motor ${PiPCA9685_LIBRARY})

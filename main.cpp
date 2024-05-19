@@ -1,6 +1,7 @@
 #include "MyTCPClient.h"
 #include <atomic>
 #include <csignal>
+#include <Modelec/CLParser.h>
 
 std::atomic<bool> shouldStop = false;
 
@@ -11,10 +12,10 @@ void signalHandler( int signum ) {
 int main(int argc, char* argv[]) {
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
-    int port = 8080;
-    if (argc > 1) {
-        port = std::stoi(argv[1]);
-    }
+
+    CLParser clParser(argc, argv);
+
+    int port = std::stoi(clParser.getOption("port", "8080"));
 
     MyTCPClient client("127.0.0.1", port);
 
