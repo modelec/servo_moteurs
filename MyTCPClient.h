@@ -89,7 +89,7 @@ private:
     // const anglePince anglePince1 = {42, 32, 15};//Ecart -20
     // const anglePince anglePince2 = {152, 141, 122};//Ecart -22
 
-    const anglePince anglePince0 = {142, 129, 118, 108};//Ecart -27
+    const anglePince anglePince0 = {136, 123, 112, 102};//Ecart -27
     const anglePince anglePince1 = {42, 32, 19, 15};//Ecart -20
     const anglePince anglePince2 = {152, 141, 125, 122};//Ecart -22
 
